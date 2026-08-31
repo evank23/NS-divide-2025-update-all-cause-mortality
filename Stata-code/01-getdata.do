@@ -36,7 +36,7 @@ import delimited "`dir2'population_estimates_1981_2024.csv", clear
 rename agegroup agegrp
 sencode agegrp, replace
 label drop agegrp
-replace agegrp=agegrp-1
+replace agegrp=0 if agegrp==19
 sencode area, replace
 sencode sex, replace
 merge 1:1 area sex agegrp year using `tempf', nogen
