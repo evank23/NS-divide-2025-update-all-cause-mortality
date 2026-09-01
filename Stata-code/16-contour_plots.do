@@ -63,7 +63,12 @@ label var IRRmale "% male excess mortality in the North"
 label var IRRfemale "% female excess mortality in the North"
 
 //all people
-twoway contour IRRpeople agecat year, zlabel(#10) format(%5.0f) ///
+replace IRRpeople = -20 if IRRpeople < -20
+replace IRRpeople = 80 if IRRpeople > 80
+twoway contour IRRpeople agecat year, zlabel(-20(10)80) format(%5.0f) ///
+	ccuts(-20(10)80) ///
+	ccolors(navy blue cyan green lime yellow gold orange red cranberry maroon ) ///
+	interp(none) ///
 	xscale(range(1981 2024)) xlabel(1981 1985(5)2020 2024,angle(45) labsize(3)) xtitle("Year", size(medlarge)) ///
 	yscale(range(1 19)) ylabel(1(1)19,valuelabel angle(0) labsize(2.4)) ytitle("Age category", size(medlarge)) ///
 	|| function y=int((x-1981)/5)+3, range(1981 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
@@ -74,7 +79,7 @@ twoway contour IRRpeople agecat year, zlabel(#10) format(%5.0f) ///
 	|| function y=int((x-1981)/5)+13, range(1981 2015) color(black) lstyle(foreground) clwidth(*0.5) ///
 	|| function y=int((x-1981)/5)+15, range(1981 2005) color(black) lstyle(foreground) clwidth(*0.5) ///
 	|| function y=int((x-1981)/5)+17, range(1981 1995) color(black) lstyle(foreground) clwidth(*0.5) ///
-	|| function y=int((x-1981)/5)+19, range(1981 1985) color(black) lstyle(foreground) clwidth(*0.5) ///	
+	|| function y=int((x-1981)/5)+19, range(1981 1985) color(black) lstyle(foreground) clwidth(*0.5) ///		
 	|| function y=int((x-1981)/5)+1, range(1981 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
 	|| function y=int((x-1981)/5)-1, range(1991 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
 	|| function y=int((x-1981)/5)-3, range(2001 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
@@ -82,11 +87,17 @@ twoway contour IRRpeople agecat year, zlabel(#10) format(%5.0f) ///
 	|| function y=int((x-1981)/5)-7, range(2021 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
 	, legend(off)
 *graph save "`dir4'16-contour_all.gph", replace
-*graph export "`dir4'16-contour_all.eps", replace
 graph export "`dir4'16-contour_all.png", width(1200) replace
+graph export "`dir4'16-contour_all.eps", replace
+
 
 //male
-twoway contour IRRmale agecat year, zlabel(#10) format(%5.0f)  ///
+replace IRRmale = -20 if IRRmale < -20
+replace IRRmale = 80 if IRRmale > 80
+twoway contour IRRmale agecat year, zlabel(-20(10)80) format(%5.0f)  ///
+	ccuts(-20(10)80) ///
+	ccolors(navy blue cyan green lime yellow gold orange red cranberry maroon ) ///
+	interp(none) ///
 	xscale(range(1981 2024)) xlabel(1981 1985(5)2020 2024,angle(45) labsize(3)) xtitle("Year", size(medlarge)) ///
 	yscale(range(1 19)) ylabel(1(1)19,valuelabel angle(0) labsize(2.4)) ytitle("Age category", size(medlarge)) ///
 	|| function y=int((x-1981)/5)+3, range(1981 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
@@ -105,11 +116,16 @@ twoway contour IRRmale agecat year, zlabel(#10) format(%5.0f)  ///
 	|| function y=int((x-1981)/5)-7, range(2021 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
 	, legend(off)
 *graph save "`dir4'16-contour_male.gph", replace
-*graph export "`dir4'16-contour_male.eps", replace
 graph export "`dir4'16-contour_male.png", width(1200) replace
+graph export "`dir4'16-contour_male.eps", replace
 
 //female
-twoway contour IRRfemale agecat year, zlabel(#10) format(%5.0f)  ///
+replace IRRfemale = -20 if IRRfemale < -20
+replace IRRfemale = 80 if IRRfemale > 80
+twoway contour IRRfemale agecat year, zlabel(-20(10)80) format(%5.0f)  ///
+	ccuts(-20(10)80) ///
+	ccolors(navy blue cyan green lime yellow gold orange red cranberry maroon ) ///
+	interp(none) ///
 	xscale(range(1981 2024)) xlabel(1981 1985(5)2020 2024,angle(45) labsize(3)) xtitle("Year", size(medlarge)) ///
 	yscale(range(1 19)) ylabel(1(1)19,valuelabel angle(0) labsize(2.4)) ytitle("Age category", size(medlarge)) ///
 	|| function y=int((x-1981)/5)+3, range(1981 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
@@ -128,5 +144,5 @@ twoway contour IRRfemale agecat year, zlabel(#10) format(%5.0f)  ///
 	|| function y=int((x-1981)/5)-7, range(2021 2024) color(black) lstyle(foreground) clwidth(*0.5) ///
 	, legend(off)
 *graph save "`dir4'16-contour_female.gph", replace
-*graph export "`dir4'16-contour_female.eps", replace
 graph export "`dir4'16-contour_female.png", width(1200) replace
+graph export "`dir4'16-contour_female.eps", replace
