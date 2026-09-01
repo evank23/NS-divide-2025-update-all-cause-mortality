@@ -251,3 +251,7 @@ stats2
 
 //contour plots
 qui do "16-contour_plots.do"
+
+//sens nbreg
+qui do "17-nbr_sens.do"
+
